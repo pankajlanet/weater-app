@@ -1,9 +1,15 @@
 const express = require('express');
 const { dirname } = require('path');
 const path = require('path')
+const hbs = require('hbs')
 
 const app = express();
+const hbsPath = path.join(__dirname , '/views')
+
 app.use(express.static(path.join(__dirname, '../public') ))
+app.set("view engine", "hbs");
+app.set('views', hbsPath)
+
 
 app.get( '/' ,(req ,res)=> {
 
