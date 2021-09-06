@@ -1,6 +1,9 @@
 const express = require('express');
+const { dirname } = require('path');
+const path = require('path')
 
 const app = express();
+app.use(express.static(path.join(__dirname, '../public') ))
 
 app.get( '/' ,(req ,res)=> {
 
@@ -8,11 +11,21 @@ app.get( '/' ,(req ,res)=> {
     
 })
 
+app.get('/show' ,(req, res)=> {
+    res.render('show')
 
-app.get('/another' ,()=> {
-    res.send('another file text')
+} )
+
+app.get('/another' ,(req,res)=> {
+    res.send('another file text');
 })
 
-app.listen(process.env.PORT , ()=> {
+
+app.get('*', (req,res)=> {
+    res.send("<h1>this url in invalid please enter a valid url</h1>")
+})
+app.listen( process.env.PORT, ()=> {
     console.log("server is running on port 3000")
+    console.log(__dirname)
 })
+
